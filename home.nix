@@ -33,6 +33,7 @@
     tree
     wget
     zoxide
+    lazygit
     
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
@@ -108,5 +109,30 @@
   };
   programs.fzf = {
   	enable = true;
+  };
+  programs.git = {
+    enable = true;
+    userName = "Frode Egeland";
+    userEmail = "frode.egeland@amaysim.com.au";
+    signing = {
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJVi/oMY1pAdioLmEkqzCexFono9ZuI7coltigGreKA/";
+      signByDefault = true;
+    };
+    delta.enable = true;
+    aliases = {
+      ci = "commit --signoff";
+      prp = "pull --rebase --prune";
+      lg = "log --oneline --abbrev-commit --all --graph --decorate --color --show-signature --no-merges";
+      cb = "checkout -b";
+      co = "checkout";
+    };
+    extraConfig = {
+      init = {
+        defaultBranch = "main";
+      };
+      push = {
+        autoSetupRemote = true;
+      };
+    };
   };
 }
