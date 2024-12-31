@@ -18,15 +18,19 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    awsume
+    awscli2
     bat
-    dbeaver
+    dbeaver-bin
     delta
+    deno
     docker
     fzf
     gnused
     gron
     jq
     lsd
+    nodejs_22
     pwgen
     ripgrep
     starship
@@ -97,15 +101,19 @@
   programs.zoxide.enableZshIntegration = true;
   programs.zsh = {
   	enable = true;
-	enableAutosuggestions = true;
-	history = {
-		ignoreAllDups = true;
-	};
+    autosuggestion.enable = true;
+  	history = {
+  		ignoreAllDups = true;
+  	};
   	shellAliases = {
 		ll = "lsd -lh";
 		la = "lsd -lha";
+    gst = "git status";
+    awsume = "source awsume";
 	};
-	initExtra = "eval \"$(zoxide init --cmd c zsh)\"";
+	initExtra = "eval \"$(zoxide init --cmd c zsh)\"\n
+    fpath=(~/.awsume/zsh-autocomplete/ $fpath)
+    PATH=$HOME/.cargo/bin:/opt/homebrew/opt/node@22/bin:$PATH";
   };
   programs.fzf = {
   	enable = true;
